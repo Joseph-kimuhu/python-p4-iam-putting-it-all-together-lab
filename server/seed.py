@@ -4,8 +4,14 @@ from random import randint, choice as rc
 
 from faker import Faker
 
-from app import app
-from models import db, Recipe, User
+try:
+    from app import app
+    from models import db, Recipe, User
+except ImportError:
+    import sys
+    sys.path.append('..')
+    from server.app import app
+    from server.models import db, Recipe, User
 
 fake = Faker()
 
