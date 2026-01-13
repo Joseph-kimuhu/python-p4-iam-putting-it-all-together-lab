@@ -8,8 +8,12 @@ if __name__ == '__main__':
     from config import app, db, api
     from models import User, Recipe
 else:
-    from .config import app, db, api
-    from .models import User, Recipe
+    try:
+        from .config import app, db, api
+        from .models import User, Recipe
+    except ImportError:
+        from config import app, db, api
+        from models import User, Recipe
 
 class Signup(Resource):
     def post(self):
