@@ -13,9 +13,10 @@ class TestSignup:
 
     def test_creates_users_at_signup(self):
         '''creates user records with usernames and passwords at /signup.'''
-        
+
         with app.app_context():
-            
+
+            db.session.rollback()
             User.query.delete()
             db.session.commit()
         
@@ -53,9 +54,10 @@ class TestSignup:
 
     def test_422s_invalid_users_at_signup(self):
         '''422s invalid usernames at /signup.'''
-        
+
         with app.app_context():
-            
+
+            db.session.rollback()
             User.query.delete()
             db.session.commit()
         
@@ -81,9 +83,10 @@ class TestCheckSession:
 
     def test_returns_user_json_for_active_session(self):
         '''returns JSON for the user's data if there is an active session.'''
-        
+
         with app.app_context():
-            
+
+            db.session.rollback()
             User.query.delete()
             db.session.commit()
         
@@ -132,9 +135,10 @@ class TestLogin:
 
     def test_logs_in(self):
         '''logs users in with a username and password at /login.'''
-        
+
         with app.app_context():
-            
+
+            db.session.rollback()
             User.query.delete()
             db.session.commit()
         
@@ -167,9 +171,10 @@ class TestLogin:
 
     def test_401s_bad_logins(self):
         '''returns 401 for an invalid username and password at /login.'''
-        
+
         with app.app_context():
-            
+
+            db.session.rollback()
             User.query.delete()
             db.session.commit()
         
@@ -191,7 +196,8 @@ class TestLogout:
     def test_logs_out(self):
         '''logs users out at /logout.'''
         with app.app_context():
-            
+
+            db.session.rollback()
             User.query.delete()
             db.session.commit()
         
@@ -230,7 +236,8 @@ class TestRecipeIndex:
         '''returns a list of recipes associated with the logged in user and a 200 status code.'''
 
         with app.app_context():
-            
+
+            db.session.rollback()
             Recipe.query.delete()
             User.query.delete()
             db.session.commit()
@@ -286,7 +293,8 @@ class TestRecipeIndex:
     def test_get_route_returns_401_when_not_logged_in(self):
         
         with app.app_context():
-            
+
+            db.session.rollback()
             Recipe.query.delete()
             User.query.delete()
             db.session.commit()
@@ -306,7 +314,8 @@ class TestRecipeIndex:
         '''returns a list of recipes associated with the logged in user and a 200 status code.'''
 
         with app.app_context():
-            
+
+            db.session.rollback()
             Recipe.query.delete()
             User.query.delete()
             db.session.commit()
